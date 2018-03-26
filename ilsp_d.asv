@@ -1,0 +1,14 @@
+function ilsp_d
+clc;clear
+[A, b, beps, fe] = coke_upc;
+n=500;
+x=zeros(n,length(logspace(-8,0,100)));
+i=1;
+for lambda=logspace(-8,0,100)
+    A_lambda=[A;lambda*eye(n)];
+    b_hat=[b;zeros(n,1)];
+    f_lambda=pinv(A_lambda)*b_hat;
+    y(i)=norm(beps-A*f_lambda);
+    i=i+1;
+end
+loglog(norm(beps-A*f_lambda),norm(f_lambda))
